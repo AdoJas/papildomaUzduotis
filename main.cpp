@@ -4,7 +4,7 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
-#include "unordered_set"
+#include "set"
 #include <regex>
 
 std::string transform(std::string& input){
@@ -29,7 +29,7 @@ int main() {
     std::ofstream outputUrl("urls.txt");
 
     std::map<std::string, int> words; //Fiksuoja kiek kartu pasikartoja zodis
-    std::map<std::string, std::unordered_set<int>> wordLines; //Fiksuoja koks key[zodis] turi pasikartojima kurioj linijoj
+    std::map<std::string, std::set<int>> wordLines; //Fiksuoja koks key[zodis] turi pasikartojima kurioj linijoj
 
     std::vector<std::string> urlVector;
 
@@ -59,6 +59,18 @@ int main() {
             }
         }
     }
+
+    for (const auto &pair : words) {
+        if (pair.second > 1) {
+            outputFile << pair.first << ": " << pair.second << std::endl;
+            outputFile << "Lines: ";
+            for (int ln : wordLines[pair.first]) {
+                outputFile << ln << " ";
+            }
+            outputFile << std::endl;
+        }
+    }
+
     return 0;
 }
 
