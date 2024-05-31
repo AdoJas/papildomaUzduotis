@@ -71,6 +71,10 @@ int main() {
         }
     }
 
+    inputFile.close();
+    outputFile.close();
+    outputUrl.close();
+
     return 0;
 }
 
